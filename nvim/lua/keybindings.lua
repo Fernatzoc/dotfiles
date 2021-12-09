@@ -4,8 +4,8 @@ end
 
 vim.g.mapleader = ' '
 
-mapper("n","w", ":w<CR>")
-mapper("n","q", ":q<CR>")
+mapper("n","<C-w>", ":w<CR>")
+mapper("n","<C-q>", ":q<CR>")
 mapper("n", "<Leader>qq", ":q!<CR>")
 mapper("n", "<C-e>", ":bd<CR>")
 mapper("n","tt", ":t.<CR>")
