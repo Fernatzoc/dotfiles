@@ -14,6 +14,7 @@ ln -s ~/dotfiles/nvim/ ~/.config/
 
 
 #SSH Settings
+echo "Creating SSH Settings"
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
 touch ~/.ssh/config
 chmod 600 ~/.ssh/config
