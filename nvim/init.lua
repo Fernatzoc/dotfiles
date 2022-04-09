@@ -48,8 +48,8 @@ local colorSchemes = {
     tokyoNight = 'tokyonight'
 }
 
-vim.cmd(string.format('colorscheme ' .. colorSchemes.gruvbox))
-vim.cmd [[hi normal guibg=NONE ctermbg=NONE]]
+vim.cmd(string.format('colorscheme ' .. colorSchemes.ayu))
+--vim.cmd [[hi normal guibg=NONE ctermbg=NONE]]
 --vim.g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snips")
 --vim.g.vsnip_snippet_dir = vim.fn.expand("~/.vsnip")
 vim.g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snips")

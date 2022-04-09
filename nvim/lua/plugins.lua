@@ -106,7 +106,7 @@ return require"packer".startup(function(use)
     use {'ntpeters/vim-better-whitespace'}
 
     -- Tmux
-    use {'benmills/vimux'}
+    --use {'benmills/vimux'}
     use {'christoomey/vim-tmux-navigator'}
 
     -- Snippets
