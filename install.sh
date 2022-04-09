@@ -10,8 +10,8 @@ fi
 
 echo "Removing existing dotfiles"
 # remove files if they already exist
-unlink ~/.config/nvim ~/.zshrc ~/.p10k.zsh ~/.tmux ~/.tmux.conf
-rm -rf ~/.config/nvim ~/.zshrc ~/.p10k.zsh ~/.tmux ~/.tmux.conf
+unlink ~/.config/nvim ~/.config/kitty ~/.zshrc ~/.p10k.zsh ~/.tmux ~/.tmux.conf
+rm -rf ~/.config/nvim ~/.config/kitty ~/.zshrc ~/.p10k.zsh ~/.tmux ~/.tmux.conf
 
 echo "Creating symlinks"
 # Neovim expects some folders already exist
@@ -19,6 +19,7 @@ mkdir -p ~/.config
 
 # Symlinking files
 ln -s ~/dotfiles/nvim/ ~/.config/
+ln -s ~/dotfiles/kitty/ ~/.config/
 ln -s ~/dotfiles/zshrc ~/.zshrc
 ln -s ~/dotfiles/p10k.zsh ~/.p10k.zsh
 
