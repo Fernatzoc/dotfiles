@@ -1,13 +1,13 @@
 local lsp_installer = require("nvim-lsp-installer")
 
 local servers = {
---  "bashls",
+    "bashls",
 --  "clangd",
     "html",
     "cssls",
---  "jsonls",
+    "jsonls",
 --  "rust_analyzer",
---  "sumneko_lua",
+    "sumneko_lua",
 --  "svelte",
     "tsserver",
     "pyright"

@@ -54,6 +54,10 @@ vim.cmd(string.format('colorscheme ' .. colorSchemes.ayu))
 --vim.g.vsnip_snippet_dir = vim.fn.expand("~/.vsnip")
 vim.g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snips")
 
+-- Current Word
+vim.cmd("hi CurrentWord gui=underline,bold,italic cterm=underline,bold,italic")
+
+
 get_bufnrs = function()
   return vim.api.nvim_list_bufs()
 end

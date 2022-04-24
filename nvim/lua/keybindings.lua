@@ -68,6 +68,8 @@ keymap("n", "gh", ":Lspsaga hover_doc<CR>", {silent = true})
 keymap("n", "<leader>m", ":Lspsaga diagnostic_jump_prev<CR>", {silent = true})
 keymap("n", "<leader>n", ":Lspsaga diagnostic_jump_next<CR>", {silent = true})
 keymap("n", "<leader>ca", ":Lspsaga code_action<CR>", {silent = true})
+keymap("n", "<leader>gr", ":Lspsaga rename<CR>", {silent = true, noremap = true})
+keymap("n", "<leader>gs", ":Lspsaga signature_help<CR>", {silent= true})
 -- *****************************************************************************
 -- Fold
 -- *****************************************************************************

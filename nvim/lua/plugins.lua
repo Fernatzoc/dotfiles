@@ -70,9 +70,10 @@ return require"packer".startup(function(use)
     use "hrsh7th/cmp-buffer"
     use "mhartington/formatter.nvim"
     use "neovim/nvim-lspconfig"
-    use "glepnir/lspsaga.nvim"
+    --use "glepnir/lspsaga.nvim"
+    use { 'tami5/lspsaga.nvim', branch = 'nvim6.0'}
     use "williamboman/nvim-lsp-installer"
-    use {"ray-x/lsp_signature.nvim"}
+    --use {"ray-x/lsp_signature.nvim"}
 
     -- Flutter
     use {'dart-lang/dart-vim-plugin'}
@@ -110,7 +111,9 @@ return require"packer".startup(function(use)
     use {'christoomey/vim-tmux-navigator'}
 
     -- Snippets
-    use {'dsznajder/vscode-es7-javascript-react-snippets'}
+    use {'dsznajder/vscode-es7-javascript-react-snippets',
+    run = 'yarn install --frozen-lockfile && yarn compile'
+    }
     use {'xabikos/vscode-javascript'}
 
 end)

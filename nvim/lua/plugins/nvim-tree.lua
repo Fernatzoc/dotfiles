@@ -1,4 +1,4 @@
-vim.g.nvim_tree_indent_markers = 1
+--vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_root_folder_modifier = ':~'
 vim.g.vim_tree_tab_open = 1
 vim.g.nvim_tree_width_allow_resize = 1

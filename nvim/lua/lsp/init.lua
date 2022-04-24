@@ -18,7 +18,10 @@ saga.init_lsp_saga {
     infor_sign = 'I', ]]
     border_style = "round",
     code_action_keys = {quit = "<ESC>"},
-    rename_action_keys = {quit = "<ESC>"}
+    rename_action_keys = {quit = "<ESC>"},
+    --code_action_prompt = {
+    --enable = false,
+  --},
 }
 
 --
