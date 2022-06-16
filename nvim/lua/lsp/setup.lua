@@ -11,7 +11,8 @@ local servers = {
     "sumneko_lua",
 --  "svelte",
     "tsserver",
-    "pyright"
+    "pyright",
+    "dartls"
 }
 
 for _, name in pairs(servers) do
