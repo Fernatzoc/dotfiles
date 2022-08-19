@@ -39,7 +39,7 @@ end
 function prettierFormatter()
     --check if there is a local prettier exe or use the global one
     local prettier_exe = "./node_modules/.bin/prettier"
-    if vim.fn.executable(prettier_exe) ~= 1 then prettier_exe = "npx prettier" end
+      if vim.fn.executable(prettier_exe) ~= 1 then prettier_exe = "npx prettier" end
 
     return {
         exe = prettier_exe,
