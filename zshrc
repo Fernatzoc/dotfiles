@@ -59,6 +59,7 @@ alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
 alias cat='bat'
+alias sail='./vendor/bin/sail'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
