@@ -1,22 +1,5 @@
-local o = vim.o
-local wo = vim.wo
-
-wo.number = true
-o.clipboard = "unnamedplus"
-
-o.hidden = true
-o.guifont = "Fira Code:h12"
-o.lazyredraw = true
-
-o.shell = "/bin/zsh"
-
--- Will put the new window below the currentone. (:sp)
-o.splitbelow = true
-
--- Will put the new window right of the current one. (:vs)
-o.splitright = true
-
 -- Leader
+vim.cmd('let mapleader=" "')
 
 vim.cmd("set termguicolors")
 vim.cmd("set hidden")
@@ -29,6 +12,7 @@ vim.cmd("set shiftwidth=2")
 
 -- vsplit at right side"
 vim.cmd("set splitright")
+vim.cmd("set splitbelow")
 vim.cmd("set cursorline")
 vim.cmd("set number")
 -- command line completion
@@ -70,4 +54,3 @@ vim.cmd("set foldlevelstart=99")
 -- Coc enhancements
 vim.cmd("set cmdheight=1")
 vim.cmd("set updatetime=300")
-

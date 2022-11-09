@@ -1,6 +1,7 @@
+vim.opt.termguicolors = true
+
 require('bufferline').setup({
   options = {
-    indicator_icon = ' ',
     buffer_close_icon = '',
     modified_icon = '●',
     close_icon = '',
@@ -8,6 +9,7 @@ require('bufferline').setup({
     right_mouse_command = 'Bdelete! %d',
     left_trunc_marker = '',
     right_trunc_marker = '',
+    diagnostics = 'coc',
     offsets = {
       { filetype = 'NvimTree', text = 'EXPLORER', text_align = 'center' },
     },

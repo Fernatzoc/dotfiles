@@ -4,6 +4,8 @@ require('settings')
 -- packages config
 
 require('plugins.treesitter')
+require('plugins.nvim-tree')
+require('plugins.tabs')
 require('plugins.smallConfigs')
 require('plugins.codi')
 require('plugins.fzf')
@@ -11,17 +13,7 @@ require('plugins.quickUI')
 require('plugins.startify')
 require('plugins.multiCursor')
 require('plugins.indentLines')
-require('plugins.nvim-tree')
-require('plugins.lualine')
-require('plugins.tabs')
-
--- LSP
-require('lsp')
-require('lsp.setup')
-
-require('plugins.cmp')
-require('plugins.lspConfig')
-require('plugins.lspSignature')
+require('plugins.coc')
 
 -- end packages config
 
@@ -30,37 +22,17 @@ require('colors')
 require('customFunctions')
 
 local colorSchemes = {
-    ayu = 'ayu',
-    cobalt = 'cobalt2',
-    dracula = 'dracula',
-    draculaPro = 'dracula_pro',
-    gruvbox = 'gruvbox',
-    gruvboxMaterial = 'gruvbox-material',
-    materialMonokai = 'material-monokai',
-    monokaiPro = 'monokai_pro',
-    nightOwl = 'night-owl',
-    nord = 'nord',
-    nova = 'nova',
-    one = 'one',
-    onehalflight = 'onehalflight',
-    paperColor = 'PaperColor',
-    quantum = 'quantum',
-    tokyoNight = 'tokyonight'
+  dracula = 'dracula',
+  draculaPro = 'dracula_pro',
+  gruvbox = 'gruvbox',
+  gruvboxMaterial = 'gruvbox-material',
+  nightOwl = 'night-owl',
+  nova = 'nova',
+  tokyoNight = 'tokyonight',
+  catppuccin = 'catppuccin'
 }
 
-vim.cmd(string.format('colorscheme ' .. colorSchemes.ayu))
---vim.cmd [[hi normal guibg=NONE ctermbg=NONE]]
---vim.g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snips")
---vim.g.vsnip_snippet_dir = vim.fn.expand("~/.vsnip")
-vim.g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snips")
+vim.cmd(string.format('colorscheme ' .. colorSchemes.catppuccin))
 
 -- Current Word
 vim.cmd("hi CurrentWord gui=underline,bold,italic cterm=underline,bold,italic")
-
-
-get_bufnrs = function()
-  return vim.api.nvim_list_bufs()
-end
-
-
-
