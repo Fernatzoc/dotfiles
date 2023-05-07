@@ -5,6 +5,7 @@ vim.opt.hidden = true
 
 vim.opt.splitright = true
 vim.opt.cursorline = true
+vim.opt.splitbelow = true
 vim.opt.number = true
 
 -- Indentation
