@@ -28,8 +28,8 @@ vim.keymap.set("i", "<M-Down>", "<Esc>:m+<CR>", opts)
 -- Change Buffer
 vim.keymap.set("n", "<S-m>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-n>", ":bprev<CR>", opts)
-vim.keymap.set("n", "<TAB>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", opts)
+--vim.keymap.set("n", "<TAB>", ":bnext<CR>", opts)
+--vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -1<CR>", opts)

@@ -53,6 +53,12 @@ require("lazy").setup({
     tag = "nightly",
   },
 
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons'
+  },
+
   -- LSP
   {
     'VonHeikemen/lsp-zero.nvim',
