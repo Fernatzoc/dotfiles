@@ -122,7 +122,8 @@ local completion = null_ls.builtins.completion
 local null_sources = {
   completion.spell,
   --diagnostics.eslint,
-  formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote", "--tsx-single-quote" } }),
+  formatting.prettier.with({
+    extra_args = { "--no-semi", "--single-quote", "--trailing-comma", "none", "--jsx-single-quote", "--tsx-single-quote" } }),
   formatting.rustfmt,
   formatting.dart_format,
   formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" } }),
