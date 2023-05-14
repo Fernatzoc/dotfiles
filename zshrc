@@ -141,6 +141,9 @@ function rmk(){
 export BROWSER=/usr/bin/brave
 export PATH="$HOME/.flutter/flutter/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export PATH=$PATH:/usr/share/dotnet
+export PATH=$PATH:/home/fernatzoc/.dotnet/tools
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
