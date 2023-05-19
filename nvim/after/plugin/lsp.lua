@@ -6,6 +6,7 @@ local mason_null_ls = require("mason-null-ls")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
+  "csharp_ls",
   "tsserver",
   "eslint",
   "lua_ls",
@@ -16,6 +17,7 @@ lsp.ensure_installed({
 mason.setup()
 mason_null_ls.setup({
   ensure_installed = {
+    "csharpier",
     "stylua",
     "prettier",
     "fixjson",

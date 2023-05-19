@@ -59,6 +59,9 @@ require("lazy").setup({
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
 
+  'github/copilot.vim',
+
+
   -- LSP
   {
     'VonHeikemen/lsp-zero.nvim',
