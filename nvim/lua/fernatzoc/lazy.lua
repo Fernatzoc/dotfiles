@@ -26,6 +26,7 @@ require("lazy").setup({
   "marko-cerovac/material.nvim",
   { "catppuccin/nvim",                 name = "catppuccin" },
   "rebelot/kanagawa.nvim",
+  "morhetz/gruvbox",
 
   "ellisonleao/glow.nvim",
   "folke/trouble.nvim",
@@ -58,9 +59,6 @@ require("lazy").setup({
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
-
-  'github/copilot.vim',
-
 
   -- LSP
   {
