@@ -16,7 +16,14 @@ require("lazy").setup({
   "echasnovski/mini.nvim",
   -- heads up: lualine blanks the start screen
   "nvim-lualine/lualine.nvim",
-  "j-hui/fidget.nvim",
+  {
+    "j-hui/fidget.nvim",
+    tag = "legacy",
+    event = "LspAttach",
+    opts = {
+      -- options
+    },
+  },
   "nvim-tree/nvim-web-devicons",
   "goolord/alpha-nvim",
   "tpope/vim-eunuch",
@@ -27,6 +34,7 @@ require("lazy").setup({
   { "catppuccin/nvim",                 name = "catppuccin" },
   "rebelot/kanagawa.nvim",
   "morhetz/gruvbox",
+  "Shatur/neovim-ayu",
 
   "ellisonleao/glow.nvim",
   "folke/trouble.nvim",
