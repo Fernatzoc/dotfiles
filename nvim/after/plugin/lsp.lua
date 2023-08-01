@@ -11,12 +11,14 @@ lsp.ensure_installed({
   "eslint",
   "lua_ls",
   "rust_analyzer",
-  "clangd"
+  "clangd",
+  "jdtls"
 })
 
 mason.setup()
 mason_null_ls.setup({
   ensure_installed = {
+    "google_java_format",
     "csharpier",
     "stylua",
     "prettier",
@@ -128,6 +130,7 @@ local null_sources = {
     extra_args = { "--no-semi", "--single-quote", "--trailing-comma", "none", "--jsx-single-quote", "--tsx-single-quote" } }),
   formatting.rustfmt,
   formatting.dart_format,
+  formatting.google_java_format,
   formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" } }),
 }
 
