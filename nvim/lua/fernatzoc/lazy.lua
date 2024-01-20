@@ -31,15 +31,14 @@ require("lazy").setup({
 
   -- Themes
   "marko-cerovac/material.nvim",
-  { "catppuccin/nvim",                 name = "catppuccin" },
+  { "catppuccin/nvim",                          name = "catppuccin" },
   "rebelot/kanagawa.nvim",
   "morhetz/gruvbox",
   "Shatur/neovim-ayu",
+  "navarasu/onedark.nvim",
 
   "ellisonleao/glow.nvim",
   "folke/trouble.nvim",
-  "lukas-reineke/indent-blankline.nvim",
-  "HiPhish/nvim-ts-rainbow2",
   "chrisgrieser/nvim-spider",
   "chrisgrieser/nvim-various-textobjs",
   {
@@ -51,12 +50,23 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
   },
+
+  -- Telescope
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.4',
+    -- or                              , branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
+
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+
+  -- BlankLine
+  { "lukas-reineke/indent-blankline.nvim",      main = "ibl",       opts = {} },
+
+  --
+  { "nvim-treesitter/nvim-treesitter",          build = ":TSUpdate" },
   {
     "nvim-tree/nvim-tree.lua",
     tag = "nightly",
@@ -93,7 +103,13 @@ require("lazy").setup({
       { "hrsh7th/cmp-path" },         -- Optional
 
       -- Snippets
-      { 'L3MON4D3/LuaSnip' },            -- Required
+      {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
+      },
       { "rafamadriz/friendly-snippets" } -- Optional
     }
   },
@@ -102,7 +118,7 @@ require("lazy").setup({
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim"
     }
   }
 })

@@ -32,7 +32,7 @@ ln -s ~/dotfiles/p10k.zsh ~/.p10k.zsh
 #ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 
 #SSH Settings
-echo "Creating SSH Settings"
-mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
-touch ~/.ssh/config
-chmod 600 ~/.ssh/config
+#echo "Creating SSH Settings"
+#mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
+#touch ~/.ssh/config
+#chmod 600 ~/.ssh/config

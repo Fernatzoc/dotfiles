@@ -1,5 +1,3 @@
-local rainbow = require 'ts-rainbow'
-
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
@@ -19,6 +17,7 @@ require 'nvim-treesitter.configs'.setup {
     "css",
     "python",
     "json",
+    "java",
     "tsx" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -27,17 +26,6 @@ require 'nvim-treesitter.configs'.setup {
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
-
-  rainbow = {
-    query = {
-      'rainbow-parens',
-      html = 'rainbow-tags'
-    },
-    strategy = {
-      rainbow.strategy.global,
-      commonlisp = rainbow.strategy['local'],
-    },
-  },
 
   highlight = {
     -- `false` will disable the whole extension

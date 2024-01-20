@@ -7,10 +7,15 @@ function UseColorScheme(color)
     gruvbox = 'gruvbox',
     ayuDark = 'ayu-dark',
     ayuLight = 'ayu-light',
-    ayuMirage = 'ayu-mirage'
+    ayuMirage = 'ayu-mirage',
+    onedark = 'onedark'
   }
 
-  color = color or colorSchemes.ayuDark
+  vim.g.onedark_config = {
+    style = 'darker',
+  }
+  color = color or colorSchemes.onedark
+  --vim.g.gruvbox_contrast_dark = 'hard'
   vim.cmd.colorscheme(color)
 end
 
