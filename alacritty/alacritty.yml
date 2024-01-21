@@ -19,7 +19,7 @@ working_directory: C:\Users\ferna
 
 # Default shell configuration
 shell:
-  program: 'C:\Program Files\WindowsApps\Microsoft.PowerShell_7.3.6.0_x64__8wekyb3d8bbwe\pwsh.exe'
+  program: 'C:\Users\ferna\AppData\Local\Microsoft\WindowsApps\Microsoft.PowerShell_8wekyb3d8bbwe\pwsh.exe'
   args:
     - '-NoLogo'
     - '-NoExit'
