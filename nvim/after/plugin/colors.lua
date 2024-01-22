@@ -3,7 +3,9 @@ function UseColorScheme(color)
 
   local colorSchemes = {
     catppuccin = 'catppuccin',
-    kanagawa = 'kanagawa',
+    kanagawaLotus = 'kanagawa-lotus',
+    kanagawaDragon = 'kanagawa-dragon',
+    kanagawaWave = 'kanagawa-wave',
     gruvbox = 'gruvbox',
     ayuDark = 'ayu-dark',
     ayuLight = 'ayu-light',
@@ -11,10 +13,10 @@ function UseColorScheme(color)
     onedark = 'onedark'
   }
 
-  vim.g.onedark_config = {
-    style = 'darker',
-  }
-  color = color or colorSchemes.onedark
+  --vim.g.onedark_config = {
+  --  style = 'darker',
+  --}
+  color = color or colorSchemes.kanagawaWave
   --vim.g.gruvbox_contrast_dark = 'hard'
   vim.cmd.colorscheme(color)
 end
