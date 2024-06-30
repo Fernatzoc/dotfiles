@@ -60,6 +60,9 @@ alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
 alias cat='bat'
 alias sail='./vendor/bin/sail'
+alias mup='cd ~/Dev/Docker/Databases/MYSQL/Mysql8/ && docker compose up'
+alias sup='cd ~/Dev/Docker/Databases/MSSQL/ && docker compose up'
+alias pup='cd ~/Dev/Docker/Databases/POSTRESQL/ && docker compose up'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -148,3 +151,5 @@ export PATH="$HOME/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+WEBKIT_DISABLE_COMPOSITING_MODE=1

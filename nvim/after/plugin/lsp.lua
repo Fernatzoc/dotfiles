@@ -10,7 +10,6 @@ lsp.ensure_installed({
   "tsserver",
   "eslint",
   "lua_ls",
-  "rust_analyzer",
   "clangd",
   "jdtls",
   "pyright",
@@ -26,7 +25,7 @@ mason_null_ls.setup({
     "tailwindcss-language-server",
     "emmet-ls",
     "google_java_format",
-    "autopep8",
+    "pyink",
   },
   automatic_installation = false,
   automatic_setup = true,
@@ -130,10 +129,9 @@ local null_sources = {
   --diagnostics.eslint,
   formatting.prettier.with({
     extra_args = { "--no-semi", "--single-quote", "--trailing-comma", "none", "--jsx-single-quote", "--tsx-single-quote" } }),
-  formatting.rustfmt,
   formatting.dart_format,
   formatting.google_java_format,
-  formatting.autopep8,
+  formatting.pyink,
   formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" } }),
 }
 
