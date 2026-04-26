@@ -1,39 +1,48 @@
+-- Optimización de carga 
+vim.loader.enable()
+
 vim.g.mapleader = " "
 
+-- Apariencia
 vim.opt.termguicolors = true
 vim.opt.hidden = true
-
 vim.opt.splitright = true
 vim.opt.cursorline = true
 vim.opt.splitbelow = true
 vim.opt.number = true
+vim.opt.relativenumber = true 
+vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
 
--- Indentation
+-- Indentación
 vim.opt.expandtab = true
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
-
 vim.opt.wrap = false
 
--- highlight matching parenthesis
-vim.opt.showmatch = true
-
--- set case insensitive searching
+-- Búsqueda
 vim.opt.ignorecase = true
--- case sensitive searching when not all lowercase
 vim.opt.smartcase = true
--- Live replacing using %s/text/newText
 vim.opt.inccommand = "split"
 
+-- Interacción
 vim.opt.mouse = "a"
-
--- use native clipboard
 vim.opt.clipboard = "unnamedplus"
 
+-- Persistencia y Seguridad
 vim.opt.backup = false
-vim.opt.errorbells = false
+vim.opt.writebackup = true
 vim.opt.swapfile = false
+vim.opt.autoread = true
+vim.opt.undofile = true 
 
--- Always show signcolumns
-vim.opt.signcolumn = "yes"
+-- Tree-sitter Nativo
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
+    if lang then
+      pcall(vim.treesitter.start)
+    end
+  end
+})

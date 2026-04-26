@@ -1,170 +1,114 @@
-local lsp = require("lsp-zero")
-local null_ls = require("null-ls")
-local mason = require("mason")
-local mason_null_ls = require("mason-null-ls")
+-- 1. Mapeos LSP 
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "Acciones LSP",
+	callback = function(event)
+		local opts = { buffer = event.buf }
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-lsp.preset("recommended")
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
 
-lsp.ensure_installed({
-  "csharp_ls",
-  "tsserver",
-  "eslint",
-  "lua_ls",
-  "clangd",
-  "jdtls",
-  "pyright",
+		-- Diagnósticos en ventana flotante
+		vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+		vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
+		-- Integración con navic para breadcrumbs
+		local navic = require("nvim-navic")
+		if client.server_capabilities.documentSymbolProvider then
+		  navic.attach(client, event.buf)
+		end
+		end,
+		})
+
+
+-- 2. Autocompletado para servidores
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- 3. Mason: Instalación y configuración automática de servidores
+require("mason").setup({})
+require("mason-lspconfig").setup({
+	ensure_installed = { "bashls", "pyright", "lua_ls", "gopls" },
+	handlers = {
+		function(server_name)
+			require("lspconfig")[server_name].setup({
+				capabilities = lsp_capabilities,
+			})
+		end,
+		
+		["lua_ls"] = function()
+			require("lspconfig").lua_ls.setup({
+				capabilities = lsp_capabilities,
+				settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+			})
+		end,
+	},
 })
 
-mason.setup()
-mason_null_ls.setup({
-  ensure_installed = {
-    "csharpier",
-    "stylua",
-    "prettier",
-    "fixjson",
-    "tailwindcss-language-server",
-    "emmet-ls",
-    "google_java_format",
-    "pyink",
-  },
-  automatic_installation = false,
-  automatic_setup = true,
-})
-
--- Fix Undefined global 'vim'
-lsp.configure("lua_ls", {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  },
-})
-
-lsp.configure("clangd", {
-  capabilities = {
-    offsetEncoding = "utf-8",
-  },
-})
-
--- Flutter already has its lsp as part of the framework
-lsp.setup_servers({ "dartls", force = true })
-
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
+-- 4. Autocompletado (nvim-cmp)
 local cmp = require("cmp")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-  ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-  ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-  ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
-  ["<Tab>"] = cmp.mapping(function(fallback)
-    if cmp.visible() then
-      cmp.select_next_item()
-    elseif has_words_before() then
-      cmp.complete()
-    else
-      fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-    end
-  end, { "i", "s" }),
-  ["<S-Tab>"] = cmp.mapping(function()
-    if cmp.visible() then
-      cmp.select_prev_item()
-    end
-  end, { "i", "s" }),
+local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-p>"] = cmp.mapping.select_prev_item(),
+		["<C-n>"] = cmp.mapping.select_next_item(),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<CR>"] = cmp.mapping.confirm({ select = false }), -- Solo confirma si seleccionas explícitamente
+
+		-- Navegación de Snippets con Tab
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp", priority = 1000 },
+		{ name = "luasnip", priority = 750 },
+		{ name = "buffer", priority = 500 },
+		{ name = "path", priority = 250 },
+	}),
 })
 
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings,
-  sources = {
-    { name = 'path' },
-    { name = 'nvim_lsp', keyword_length = 0 },
-    { name = 'buffer',   keyword_length = 3 },
-    { name = 'luasnip',  keyword_length = 2 },
-  }
-})
-
-
-lsp.set_preferences({
-  suggest_lsp_servers = false,
-  set_lsp_keymaps = { omit = { '<C-k>' } },
-})
-
-lsp.set_sign_icons({
-  error = '✘',
-  warn = '▲',
-  hint = '⚑',
-  info = '»'
-})
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-lsp.on_attach(function(client, bufnr)
-  local opts = { buffer = bufnr, remap = false }
-
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-  vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "<leader>m", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help, opts)
-end)
-
-lsp.nvim_workspace()
-
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-local completion = null_ls.builtins.completion
-local null_sources = {
-  completion.spell,
-  --diagnostics.eslint,
-  formatting.prettier.with({
-    extra_args = { "--no-semi", "--single-quote", "--trailing-comma", "none", "--jsx-single-quote", "--tsx-single-quote" } }),
-  formatting.dart_format,
-  formatting.google_java_format,
-  formatting.pyink,
-  formatting.stylua.with({ extra_args = { "--indent_type", "Spaces", "indent_width", "2" } }),
-}
-
-local function format_on_save(client, bufnr)
-  if client.supports_method('textDocument/formatting') then
-    vim.api.nvim_clear_autocmds({
-      group = augroup,
-      buffer = bufnr,
-    })
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr })
-      end,
-    })
-  end
+-- 5. Estética de Diagnósticos
+local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
-null_ls.setup({
-  debug = false,
-  sources = null_sources,
-  on_attach = format_on_save
-})
-
-lsp.setup()
 
 vim.diagnostic.config({
-  virtual_text = true,
-  severity_sort = false,
-  underline = true,
-  update_in_insert = false,
-  float = {
-    source = "always", -- Or "if_many"
-  },
+	virtual_text = { prefix = "●" },
+	severity_sort = true,
+	float = { border = "rounded", source = "always" },
 })
