@@ -19,7 +19,7 @@ require("lazy").setup({
 	{ "echasnovski/mini.nvim" }, 
 
 	-- === Interfaz de Usuario (UI) ===
-	{ "nvim-lualine/lualine.nvim", dependencies = { "SmiteshP/nvim-navic" } },
+	{ "nvim-lualine/lualine.nvim" },
 	{ "j-hui/fidget.nvim", opts = {} },   
 	{ "nvim-tree/nvim-web-devicons" },    
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }, 

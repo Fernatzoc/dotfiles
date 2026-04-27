@@ -1,8 +1,6 @@
 local status, lualine = pcall(require, "lualine")
 if not status then return end
 
-local navic = require("nvim-navic")
-
 lualine.setup({
   options = {
     theme = "auto",
@@ -28,18 +26,6 @@ lualine.setup({
     },
   },
 
-  winbar = {
-    lualine_c = {
-      {
-        function()
-          return navic.get_location()
-        end,
-        cond = function()
-          return navic.is_available()
-        end,
-      },
-    },
-  },
   inactive_winbar = {
     lualine_c = {
       { 'filename', path = 1 } 

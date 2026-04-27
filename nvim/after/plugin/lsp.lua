@@ -17,14 +17,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
 		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 		vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-
-		-- Integración con navic para breadcrumbs
-		local navic = require("nvim-navic")
-		if client.server_capabilities.documentSymbolProvider then
-		  navic.attach(client, event.buf)
-		end
-		end,
-		})
+	end,
+	})
 
 
 -- 2. Autocompletado para servidores
