@@ -6,10 +6,13 @@ if "%DOTFILES_DIR:~-1%"=="\" set "DOTFILES_DIR=%DOTFILES_DIR:~0,-1%"
 
 set "NVIM_SRC_PATH=%DOTFILES_DIR%\nvim"
 set "ALACRITTY_SRC_PATH=%DOTFILES_DIR%\alacritty"
+set "ZELLIJ_SRC_PATH=%DOTFILES_DIR%\zellij"
 set "POWERSHELL_PROFILE_SRC_PATH=%DOTFILES_DIR%\Microsoft.PowerShell_profile.ps1"
 
 set "NVIM_LINK_PATH=%LOCALAPPDATA%\nvim"
 set "ALACRITTY_LINK_PATH=%APPDATA%\alacritty"
+set "ZELLIJ_LINK_PATH=%APPDATA%\Zellij\config"
+set "ZELLIJ_LEGACY_LINK_PATH=%USERPROFILE%\.config\zellij"
 set "POWERSHELL7_PROFILE_LINK_PATH=%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 set "WINDOWSPOWERSHELL_PROFILE_LINK_PATH=%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
@@ -19,6 +22,12 @@ if errorlevel 1 goto :end
 call :ensure_link "Alacritty" "%ALACRITTY_LINK_PATH%" "%ALACRITTY_SRC_PATH%"
 if errorlevel 1 goto :end
 
+call :ensure_link "Zellij" "%ZELLIJ_LINK_PATH%" "%ZELLIJ_SRC_PATH%"
+if errorlevel 1 goto :end
+
+call :ensure_link "Zellij legacy config" "%ZELLIJ_LEGACY_LINK_PATH%" "%ZELLIJ_SRC_PATH%"
+if errorlevel 1 goto :end
+
 call :ensure_file_link "PowerShell 7 profile" "%POWERSHELL7_PROFILE_LINK_PATH%" "%POWERSHELL_PROFILE_SRC_PATH%"
 if errorlevel 1 goto :end
 
@@ -26,6 +35,7 @@ call :ensure_file_link "Windows PowerShell profile" "%WINDOWSPOWERSHELL_PROFILE_
 if errorlevel 1 goto :end
 
 call :ensure_fzf
+call :ensure_zellij
 call :ensure_terminal_icons
 call :ensure_terminal_icons_pwsh_link
 
@@ -151,6 +161,28 @@ if errorlevel 1 (
     echo [WARN] Could not install fzf automatically.
 ) else (
     echo fzf installed successfully.
+)
+exit /b 0
+
+:ensure_zellij
+where zellij >nul 2>&1
+if not errorlevel 1 (
+    echo Zellij is already installed.
+    exit /b 0
+)
+
+where winget >nul 2>&1
+if errorlevel 1 (
+    echo [WARN] winget is not available. Install Zellij manually: winget install --id Zellij.Zellij -e
+    exit /b 0
+)
+
+echo Installing Zellij via winget...
+winget install --id Zellij.Zellij --exact --source winget --accept-package-agreements --accept-source-agreements --silent
+if errorlevel 1 (
+    echo [WARN] Could not install Zellij automatically.
+) else (
+    echo Zellij installed successfully.
 )
 exit /b 0
 

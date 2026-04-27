@@ -1,3 +1,10 @@
+if (-not $env:SHELL) {
+	$pwshCommand = Get-Command pwsh -ErrorAction SilentlyContinue
+	if ($pwshCommand) {
+		$env:SHELL = $pwshCommand.Source
+	}
+}
+
 if (Get-Command starship -ErrorAction SilentlyContinue) {
 	Invoke-Expression (& starship init powershell)
 }
