@@ -11,6 +11,7 @@ function UseColorScheme(color)
     ayuLight = "ayu-light",
     ayuMirage = "ayu-mirage",
     onedark = "onedark",
+    thorn = "thorn",
   }
 
   require("kanagawa").setup({
@@ -41,7 +42,7 @@ function UseColorScheme(color)
   vim.g.onedark_config = {
     style = "darker",
   }
-  color = color or colorSchemes.kanagawaWave
+  color = color or colorSchemes.thorn
   --vim.g.gruvbox_contrast_dark = 'hard'
   vim.cmd.colorscheme(color)
 end
